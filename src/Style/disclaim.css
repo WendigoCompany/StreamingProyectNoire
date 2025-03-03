@@ -1,0 +1,33 @@
+body {
+    background-color: #000000;
+}
+
+.alert-img-cont {
+    text-align: center;
+}
+
+.disclaim {
+    color: #df9090
+}
+
+.disc-accept {
+    color: #7cda63;
+    background-color: transparent;
+    border: .3vh solid #7cda63;
+}
+
+.disc-cancel {
+    color: #c62b2b;
+    background-color: transparent;
+    border: .3vh solid #c62b2b;
+}
+
+.disc-accept:hover {
+    color: #000000;
+    background-color: #7cda63;
+}
+
+.disc-cancel:hover {
+    color: #000000;
+    background-color: #c62b2b;
+}

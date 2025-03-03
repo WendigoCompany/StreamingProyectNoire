@@ -1,0 +1,16 @@
+.btn-icon{
+    width: 2%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0% .3%;
+
+}
+
+.div-icon{
+    position: fixed;
+    width: 100%;
+    left: calc(100% - 6%);
+    bottom: 0%;
+    
+}

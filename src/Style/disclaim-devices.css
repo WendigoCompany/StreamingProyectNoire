@@ -1,0 +1,24 @@
+.alert-img {
+    width: 20%;
+}
+
+.disclaim {
+    font-size: 3vw;
+}
+
+
+.disc-accept {
+    cursor: pointer;
+    font-size: 3vw;
+    margin: 5vh 0vh 5vh 0vh;
+    transition: background-color .4s, color .4s;
+}
+
+.disc-cancel {
+    cursor: pointer;
+    font-size: 3vw;
+    transition: background-color .4s, color .4s;
+}
+
+
+
