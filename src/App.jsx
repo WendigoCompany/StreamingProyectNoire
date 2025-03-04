@@ -3,6 +3,7 @@ import LangProvider from "./Context/lang_context";
 import "./Style/main.css"
 import "./Style/icons.css"
 import "./Style/fonts/fonts.css"
+import "./Style/mainpage.css"
 import ACProvider from "./Context/Actual_Compo";
 import Actual_Compo from "./Components/Actual_Compo";
 

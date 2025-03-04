@@ -1,0 +1,11 @@
+{
+    "es":{
+        "send-btn": "EJECUTRAR",
+        "reset-btn": "REINICIAR"
+    },
+    "en":{
+        "send-btn": "EXECUTE",
+        "reset-btn": "RESET"
+    }
+}
+

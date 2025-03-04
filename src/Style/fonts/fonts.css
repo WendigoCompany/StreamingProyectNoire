@@ -6,3 +6,12 @@
 .f1{
     font-family: 'Poppins-Regular';
 }
+
+@font-face {
+    font-family: "Orbitron-Regular";
+    src: url("./Orbitron-Regular.ttf");
+}
+
+.f2{
+    font-family: 'Orbitron-Regular';
+}
