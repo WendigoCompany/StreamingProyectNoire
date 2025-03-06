@@ -130,8 +130,33 @@
     position: absolute;
     height: 2rem;
     top: 0%;
-    right: 0%;
+    right: -20%;
+    z-index: 1000;
+    opacity: 0;
+
+
 }
+
+.dinamic-box div{
+    background-image: url("../Media/Images/Icons/viewrs.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 90% 0%;
+    width: 15%;
+    border: 3px solid black;
+    border-radius: 10%;
+    margin-top: 1%;
+    padding: 0% 2%;
+    background-color: #b7b7b796;
+}
+.dinamic-box h3{
+    font-size: .9rem;
+    display: inline-block;
+    text-align: center;
+    
+}
+
+
 
 .start-modal-cont{
     background-color: #000000d2;
@@ -167,4 +192,13 @@
 .start-modal-cont button:hover{
     background-color: #d3fffd;
     color: black;
+}
+
+
+.dialog-cont{
+    position: absolute;
+    z-index: 1000;
+    font-size: 1.5rem;
+    background-color: #000000aa;
+    padding: 0% 1%;
 }

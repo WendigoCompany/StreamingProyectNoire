@@ -3,6 +3,7 @@ import Sprays from "./Sprays";
 
 import game_lang from "../Text/game.lang.json"
 import cmd_lang from "../Text/cmd.lang.json"
+import { Scenes } from "./Scenes";
 
 const prepare_style = (bgs) => {
     const style = {}
@@ -27,6 +28,10 @@ const ArrCmd = (cmddata, i = 0) => {
     for (let j = 0; j <= i; j++) {
         text += cmd_lang[Manager.lang][cmddata[j].t.split('-')[0]][cmddata[j].t.split('-')[1]]
         text += " <br/>"
+
+        if (typeof cmddata[j].cb == "function") {
+            cmddata[j].cb()
+        }
     }
 
     i++
@@ -66,7 +71,7 @@ const search = (arr, tof, k = "id") => {
 
 class SceneManager {
     constructor() {
-        this.scene = sessionStorage.getItem("scene") || 1
+        this.scene = sessionStorage.getItem("scene") || 4
     }
 
     load_scene(scid) {
@@ -77,7 +82,11 @@ class SceneManager {
         const scene_data = this.load_scene(this.scene)
         // LOADING BG
 
-        if (scene_data.bid != -1) {
+
+
+        if (Array.isArray(scene_data.bid)) {
+
+        } else if (scene_data.bid != -1) {
             const bgdata = search(Backgrounds, scene_data.bid);
             const bgc = document.getElementsByClassName("img-cont")[0]
             const style = {
@@ -99,6 +108,7 @@ class SceneManager {
             bgc.style.opacity = 0;
 
         }
+
         // LOADING BG
 
         // LOADING SP
@@ -149,6 +159,62 @@ class SceneManager {
             }
         }
 
+
+
+        if (scene_data.cmdtxt) {
+            sessionStorage.setItem("hcmd", scene_data.scid)
+            let mode = "single";
+            if (Array.isArray(scene_data.cmdtxt)) {
+                mode = "arr"
+            }
+            LunchCmd(scene_data.cmdtxt, mode)
+        } else {
+            const cmdcache = (this.load_scene(parseInt(sessionStorage.getItem("hcmd")))).cmdtxt
+            let cmdtxt = "";
+            if (Array.isArray(cmdcache)) {
+                cmdcache.map(c => {
+                    cmdtxt += cmd_lang[Manager.lang][c.t.split('-')[0]][c.t.split('-')[1]]
+                    cmdtxt += " <br/>"
+                })
+
+            }
+            document.getElementById("cmd-retro").innerHTML = cmdtxt;
+
+        }
+
+
+
+        if (scene_data.dialog) {
+
+            const color = !scene_data.dialog.color.includes("#") ? characters[scene_data.dialog.color] : scene_data.dialog.color;
+            const style = {
+                "color": color,
+                ...prepare_style(scene_data.dialog.style),
+            };
+
+
+            Object.keys(style).map(k => {
+                document.getElementById("dialog").style[k] = style[k];
+            })
+
+
+
+            document.getElementById("dialog").innerHTML = game_lang[Manager.lang]["dialogs"][scene_data.dialog.t.split("-")[0]][scene_data.dialog.t.split("-")[1]] ;
+
+
+
+        } else {
+            document.getElementById("dialog").textContent = ""
+        }
+
+        //SPECIAL CASES
+        if (Manager.scene > 2) {
+            document.getElementsByClassName("dinamic-box")[0].style.opacity = 1
+        }
+        //SPECIAL CASES
+
+
+
         if (!scene_data.aval_cmd && !scene_data.wait) {
             //  AVANZANDO A NUEVA ESCENA
 
@@ -158,15 +224,6 @@ class SceneManager {
             }, scene_data.sc_time * 1000);
 
         }
-
-        if (scene_data.cmdtxt) {
-            let mode = "single";
-            if (Array.isArray(scene_data.cmdtxt)) {
-                mode = "arr"
-            }
-            LunchCmd(scene_data.cmdtxt, mode)
-        }
-
         if (scene_data.scid == 0) {
             setTimeout(() => {
                 const startmod = document.getElementsByClassName("start-modal-cont")[0];
@@ -176,6 +233,8 @@ class SceneManager {
                 SpecialText(startmod.querySelector("p"), game_lang[Manager.lang]["start-msj"])
             }, 300);
         }
+
+
     }
 
     // top: 10%;
@@ -186,53 +245,8 @@ class SceneManager {
 
 export const Manager = new SceneManager();
 
-class Scene {
-    constructor({ scid, bid, spid = [], dialog, cmdtxt, actions = [], aval_cmd = false, sc_time, wait = false }) {
-        this.scid = scid;
-        this.bid = bid;
-        this.spid = spid;
-        this.dialog = dialog;
-        this.cmdtxt = cmdtxt;
-        this.actions = actions;
-        this.aval_cmd = aval_cmd;
-        this.sc_time = sc_time
-        this.wait = wait
-    }
 
-}
 
-export const Scenes = [
-    new Scene({ scid: 0, bid: 0, wait: true }),
-    new Scene(
-        {
-            scid: 1, bid: 0, cmdtxt: [
-                { t: "0-0", tm: 2 },
-                { t: "0-1", tm: 2 },
-                { t: "0-2", tm: 1 },
-                { t: "0-3", tm: 1 },
-                { t: "0-4", tm: 0 },
-                { t: "0-5", tm: 0 },
-                { t: "0-6", tm: 0 },
-                { t: "0-7", tm: 0 },
-
-            ]
-            , sc_time: 7
-        }),
-        new Scene(
-            {
-                scid: 2, bid: 0, cmdtxt: [
-                    { t: "0-8", tm: 0 },
-                    { t: "0-9", tm: 3 },
-                    { t: "0-10", tm: 3},
-                    { t: "0-11", tm: 3 },
-                    { t: "0-12", tm: 1 },
-    
-                ]
-                , sc_time: 999
-            }),
-    new Scene({
-        scid:3, bid: 1, spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], dialog: "", sc_time: 2
-    }),
-
-]
-
+const characters = {
+    "noire": "rgb(206, 36, 36)",
+};

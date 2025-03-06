@@ -12,6 +12,7 @@ export default function Disclaim() {
     const { lang } = useLang();
     const { setAC } = useAC();
 
+    
     const move_to_page = () => {
         setAC("main")
     }
