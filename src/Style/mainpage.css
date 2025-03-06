@@ -53,8 +53,12 @@
     outline: none;
     padding: 0% .3%;
     color: green;
+    transition: background-color .3s;
 }
 
+.cmd-cont input:disabled{
+    background-color: rgba(0, 255, 0, 0.175)
+}
 
 .cmd-cont input:focus {
     border: 1px solid lawngreen;
@@ -202,3 +206,4 @@
     background-color: #000000aa;
     padding: 0% 1%;
 }
+

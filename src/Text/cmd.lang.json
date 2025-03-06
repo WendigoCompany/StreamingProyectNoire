@@ -20,6 +20,15 @@
       "-Movimiento en camara 0",
       "-Sonido en camara 0",
       "Estado de la camara: Encendida",
+      "Mostrando lista:",
+      "1-Uniforme Escolar",
+      "2-Enfermera",
+      "3-Policia",
+      "4-Maid",
+      "5-Ejercicio",
+      "Esperando entrada...",
+      "/help -> Mostar una pista",
+      "/rev -> Sugerir comando",
       ""
     ]
   ],

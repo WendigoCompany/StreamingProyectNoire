@@ -71,7 +71,7 @@ const search = (arr, tof, k = "id") => {
 
 class SceneManager {
     constructor() {
-        this.scene = sessionStorage.getItem("scene") || 4
+        this.scene = sessionStorage.getItem("scene") || 11
     }
 
     load_scene(scid) {
@@ -199,7 +199,7 @@ class SceneManager {
 
 
 
-            document.getElementById("dialog").innerHTML = game_lang[Manager.lang]["dialogs"][scene_data.dialog.t.split("-")[0]][scene_data.dialog.t.split("-")[1]] ;
+            document.getElementById("dialog").innerHTML = game_lang[Manager.lang]["dialogs"][scene_data.dialog.t.split("-")[0]][scene_data.dialog.t.split("-")[1]];
 
 
 
@@ -217,13 +217,20 @@ class SceneManager {
 
         if (!scene_data.aval_cmd && !scene_data.wait) {
             //  AVANZANDO A NUEVA ESCENA
-
+            document.getElementById("ligth").classList = "no-allowed";
+            document.getElementById("user-prom").disabled = true;
             setTimeout(() => {
                 Manager.scene += 1
                 Manager.show_scene()
             }, scene_data.sc_time * 1000);
 
+        } else if (scene_data.aval_cmd) {
+            document.getElementById("ligth").classList = "allowed";
+            document.getElementById("user-prom").disabled = false;
         }
+
+
+
         if (scene_data.scid == 0) {
             setTimeout(() => {
                 const startmod = document.getElementsByClassName("start-modal-cont")[0];
@@ -237,6 +244,12 @@ class SceneManager {
 
     }
 
+    load_cmd() {
+        let entry = document.getElementById("user-prom").value;
+        document.getElementById("user-prom").value = ""
+        console.log(entry);
+
+    }
     // top: 10%;
     // left: 20%;
     // LOADING SP

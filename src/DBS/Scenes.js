@@ -86,9 +86,85 @@ export const Scenes = [
 
             }, color: "noire"
         },
-        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 999
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 6
     }),
 
+
+    new Scene({
+        scid: 6, bid: 1,
+        dialog: {
+            t: "N-2", style: {
+
+            }, color: "noire"
+        },
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 10
+    }),
+
+
+    new Scene({
+        scid: 7, bid: 1,
+        dialog: {
+            t: "N-3", style: {
+
+            }, color: "noire"
+        },
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 10
+    }),
+
+
+    new Scene({
+        scid: 8, bid: 1,
+        dialog: {
+            t: "N-4", style: {
+
+            }, color: "noire"
+        },
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 6
+    }),
+
+
+    new Scene({
+        scid: 9, bid: 1,
+        dialog: {
+            t: "N-5", style: {
+
+            }, color: "noire"
+        },
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 6
+    }),
+
+
+    new Scene({
+        scid: 10, bid: 1,
+        dialog: {
+            t: "N-6", style: {
+
+            }, color: "noire"
+        },
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], sc_time: 6
+    }),
+
+    new Scene({
+        scid: 11, bid: 1,
+        cmdtxt:[
+            { t: "0-18", tm: 1 },
+            { t: "0-19", tm: 1 },
+            { t: "0-20", tm: 0 },
+            { t: "0-21", tm: 0 },
+            { t: "0-22", tm: 0 },
+            { t: "0-23", tm: 0 },
+            { t: "0-24", tm: 0 },
+            { t: "0-26", tm: 0 },
+            { t: "0-27", tm: 0 },
+            { t: "0-25", tm: 0 },
+        ],
+        dialog: {
+            t: "N-7", style: {
+
+            }, color: "noire"
+        },
+        spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], wait: true, aval_cmd: true
+    }),
 
 ]
 

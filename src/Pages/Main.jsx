@@ -22,6 +22,12 @@ export default function Main() {
 
     useEffect(() => {
         Manager.show_scene()
+        document.onkeydown =(e)=>{
+            if(e.key == "Enter"){
+                Manager.load_cmd()
+            }
+            
+        }
     }, [])
     return <>
         <button className="f2 reset-btn">{main_ui_lang[lang]["reset-btn"]}</button>
@@ -46,7 +52,7 @@ export default function Main() {
                 <h3 className="f1" id="dialog"></h3>
             </div>
             <div className="cmd-cont" >
-                <div className="allow-l"><div className="no-allowed"></div></div>
+                <div className="allow-l"><div id="ligth"></div></div>
                 <div className="p-cont">
                     <p className="f2" id="cmd-retro">
 
@@ -55,8 +61,10 @@ export default function Main() {
                 <div className="input-cont">
                     <div>
                     </div>
-                    <input className="f2" type="text" name="" id="" />
-                    <button className="f2">{main_ui_lang[lang]["send-btn"]}</button>
+                    <input className="f2" type="text" name="" id="user-prom" disabled />
+                    <button className="f2" onClick={()=>{
+                        Manager.load_cmd()
+                    }}>{main_ui_lang[lang]["send-btn"]}</button>
                 </div>
             </div>
         </div>
