@@ -9,9 +9,11 @@ export default function Lang_Compo() {
         <div className="div-icon">
             <button className="btn-icon" onClick={()=>{
                 setLang('es')
+                window.location.reload()
             }}><img className="w-100" src={icons.es_ic} alt="" /></button>
             <button className="btn-icon" onClick={()=>{
                 setLang('en')
+                window.location.reload()
             }}><img className="w-100" src={icons.en_ic} alt="" /></button>
         </div>
     </>

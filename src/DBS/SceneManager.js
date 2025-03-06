@@ -1,6 +1,9 @@
 import Backgrounds from "./Backgrounds";
 import Sprays from "./Sprays";
 
+import game_lang from "../Text/game.lang.json"
+import cmd_lang from "../Text/cmd.lang.json"
+
 const prepare_style = (bgs) => {
     const style = {}
     Object.keys(bgs).map(k => {
@@ -8,6 +11,45 @@ const prepare_style = (bgs) => {
     })
     return style
 }
+
+
+const SpecialText = (element, txt) => {
+    let text = txt.replaceAll("\n", "<br/>")
+
+    element.innerHTML = text;
+
+}
+
+const ArrCmd = (cmddata, i = 0) => {
+    let text = "";
+
+
+    for (let j = 0; j <= i; j++) {
+        text += cmd_lang[Manager.lang][cmddata[j].t.split('-')[0]][cmddata[j].t.split('-')[1]]
+        text += " <br/>"
+    }
+
+    i++
+
+    if (cmddata[i] != undefined) {
+        setTimeout(() => {
+            ArrCmd(cmddata, i)
+        }, cmddata[i].tm * 1000);
+    }
+
+    document.getElementById("cmd-retro").innerHTML = text;
+
+
+}
+
+const LunchCmd = (cmddata, mode) => {
+    if (mode == "arr") {
+        ArrCmd(cmddata)
+    }
+
+}
+
+
 
 const search = (arr, tof, k = "id") => {
 
@@ -24,7 +66,7 @@ const search = (arr, tof, k = "id") => {
 
 class SceneManager {
     constructor() {
-        this.scene = sessionStorage.getItem("scene") || 0
+        this.scene = sessionStorage.getItem("scene") || 1
     }
 
     load_scene(scid) {
@@ -76,7 +118,7 @@ class SceneManager {
 
             for (let i = 0; i < spc.length; i++) {
                 spc[i].style.opacity = 1
-                
+
             }
 
             scene_data.spid.map((spid, i) => {
@@ -107,9 +149,37 @@ class SceneManager {
             }
         }
 
+        if (!scene_data.aval_cmd && !scene_data.wait) {
+            //  AVANZANDO A NUEVA ESCENA
+
+            setTimeout(() => {
+                Manager.scene += 1
+                Manager.show_scene()
+            }, scene_data.sc_time * 1000);
+
+        }
+
+        if (scene_data.cmdtxt) {
+            let mode = "single";
+            if (Array.isArray(scene_data.cmdtxt)) {
+                mode = "arr"
+            }
+            LunchCmd(scene_data.cmdtxt, mode)
+        }
+
+        if (scene_data.scid == 0) {
+            setTimeout(() => {
+                const startmod = document.getElementsByClassName("start-modal-cont")[0];
+                // startmod.style.top = "10%";
+                startmod.style.left = "20%";
+
+                SpecialText(startmod.querySelector("p"), game_lang[Manager.lang]["start-msj"])
+            }, 300);
+        }
     }
 
-
+    // top: 10%;
+    // left: 20%;
     // LOADING SP
 }
 
@@ -117,23 +187,52 @@ class SceneManager {
 export const Manager = new SceneManager();
 
 class Scene {
-    constructor(scid, bid, spid = [], dialog, cmdtxt, actions = []) {
+    constructor({ scid, bid, spid = [], dialog, cmdtxt, actions = [], aval_cmd = false, sc_time, wait = false }) {
         this.scid = scid;
         this.bid = bid;
         this.spid = spid;
         this.dialog = dialog;
         this.cmdtxt = cmdtxt;
         this.actions = actions;
+        this.aval_cmd = aval_cmd;
+        this.sc_time = sc_time
+        this.wait = wait
     }
 
 }
 
 export const Scenes = [
-    new Scene(0, 0, [], "", ``, []),
-    new Scene(1, 1, [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], "", ``, []),
+    new Scene({ scid: 0, bid: 0, wait: true }),
+    new Scene(
+        {
+            scid: 1, bid: 0, cmdtxt: [
+                { t: "0-0", tm: 2 },
+                { t: "0-1", tm: 2 },
+                { t: "0-2", tm: 1 },
+                { t: "0-3", tm: 1 },
+                { t: "0-4", tm: 0 },
+                { t: "0-5", tm: 0 },
+                { t: "0-6", tm: 0 },
+                { t: "0-7", tm: 0 },
+
+            ]
+            , sc_time: 7
+        }),
+        new Scene(
+            {
+                scid: 2, bid: 0, cmdtxt: [
+                    { t: "0-8", tm: 0 },
+                    { t: "0-9", tm: 3 },
+                    { t: "0-10", tm: 3},
+                    { t: "0-11", tm: 3 },
+                    { t: "0-12", tm: 1 },
+    
+                ]
+                , sc_time: 999
+            }),
+    new Scene({
+        scid:3, bid: 1, spid: [{ id: 0, style: { "width": "18%", "height": "65%", "top": "15%", "left": "40%" } }], dialog: "", sc_time: 2
+    }),
+
 ]
 
-setTimeout(() => {
-    Manager.scene = 1
-    Manager.show_scene()
-}, 3000);

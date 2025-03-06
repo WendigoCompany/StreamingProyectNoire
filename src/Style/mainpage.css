@@ -132,3 +132,39 @@
     top: 0%;
     right: 0%;
 }
+
+.start-modal-cont{
+    background-color: #000000d2;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    transition: left .3s;
+    top: 10%;
+    left: -50%;
+    text-align: center;
+
+
+}
+.start-modal-cont p{
+    color: #d3fffd;
+    font-size: 1.8rem;
+}
+
+.start-modal-cont button{
+    border: 1px solid #d3fffd;
+    border-radius: 10%;
+    padding: .5% 1%;
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: #d3fffd;
+    cursor: pointer;
+    transition: color .3s,  background-color .2s;
+    outline: none;
+    margin-top: 3%;
+}
+
+
+.start-modal-cont button:hover{
+    background-color: #d3fffd;
+    color: black;
+}

@@ -1,0 +1,22 @@
+{
+  "es": [
+    [
+      "Conectando con Objetivo...",
+      "Conexión establecida!",
+      "Especificaciones del sistema:",
+      "-OS: LASOS 7.3",
+      "-Kernel: 17.33.312",
+      "-IP: 205.55.2",
+      "-VSys: NEPBS 1.2 ",
+      "Aplicando mascara anti-errores...",
+      "Aplicando mascara de red...",
+      "Duplicando controladores...",
+      "Aislando usuario...",
+      "Terminado!",
+      "Reemplazando NEPBS Proms…",
+
+      ""
+    ]
+  ],
+  "en": [["HI", "HOW"]] 
+}
